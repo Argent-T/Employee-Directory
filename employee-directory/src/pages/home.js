@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import API from "../utils/API";
 import Container from "../components/Container";
 import Alert from "../components/Alert";
-
+import EmployeeInfo from "../components/EmployeeInfo";
+import Row from "../components/Row";
+import Col from "../components/Col";
 
 class Employees extends Component {
 
@@ -14,7 +16,7 @@ class Employees extends Component {
     };
 
     componentDidMount() {
-        API.getEmployees() 
+        API.getEmployees()
             // .then(res => console.log(res.data.results))
             .then(res => this.setState({ employees: res.data.results }))
             .catch(err => console.log(err));
@@ -23,7 +25,7 @@ class Employees extends Component {
 
     handleInputChange = event => {
         this.setState({ search: event.target.value });
-        
+
     };
 
     render() {
@@ -37,8 +39,27 @@ class Employees extends Component {
                     >
                         {this.state.error}
                     </Alert>
-                   
-          
+
+                    <Row>
+                        <Col >
+                        <h4>Image</h4>
+                        </Col>
+                        <Col >
+                        <h4>Name</h4>
+                        </Col>
+                        <Col >
+                        <h4>Phone</h4>
+                        </Col>
+                        <Col >
+                        <h4>Email</h4>
+                        </Col>
+                        <Col >
+                        <h4>DOB</h4>
+                        </Col>
+                    </Row>
+
+
+                    <EmployeeInfo employees={this.state.employees} />
                 </Container>
             </div>
         );
