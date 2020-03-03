@@ -5,6 +5,7 @@ import Alert from "../components/Alert";
 import EmployeeInfo from "../components/EmployeeInfo";
 import Row from "../components/Row";
 import Col from "../components/Col";
+import SearchForm from "../components/SearchForm";
 
 class Employees extends Component {
 
@@ -16,17 +17,38 @@ class Employees extends Component {
     };
 
     componentDidMount() {
-        API.getEmployees()
+            API.getEmployees()
             // .then(res => console.log(res.data.results))
-            .then(res => this.setState({ employees: res.data.results }))
+            .then(res => this.setState({ employees: res.data.results, results: res.data.results }))
+            
             .catch(err => console.log(err));
-
+            
     };
 
     handleInputChange = event => {
-        this.setState({ search: event.target.value });
-
+        // search state seems to be behind by one keypress at all times. 
+        this.setState({ 
+            search: event.target.value, 
+            results: this.state.employees }, () => {console.log(search)});
+        
+        var search = this.state.search
+        var filtered = this.state.employees.filter(function(name){
+            return name.name.first.includes(search)
+        })
+        this.setState({results: filtered})
+        console.log(filtered)
+      
+        
+// var filtered = this.state.results.filter(function(result){
+//     return result.name.first === this.state.search
+//   })
+  
+  
+//   console.log(filtered)
     };
+
+
+
 
     render() {
         return (
@@ -41,25 +63,38 @@ class Employees extends Component {
                     </Alert>
 
                     <Row>
+                        <Col />
+                        <Col size="sm-4">
+                        <SearchForm 
+                        handleInputChange={this.handleInputChange}
+                        
+                        />
+                            
+                        
+                        </Col>
+                        <Col />
+                    </Row>
+
+                    <Row>
                         <Col >
-                        <h4>Image</h4>
+                            <h4>Image</h4>
                         </Col>
                         <Col >
-                        <h4>Name</h4>
+                            <h4>Name</h4>
                         </Col>
                         <Col >
-                        <h4>Phone</h4>
+                            <h4>Phone</h4>
                         </Col>
                         <Col >
-                        <h4>Email</h4>
+                            <h4>Email</h4>
                         </Col>
                         <Col >
-                        <h4>DOB</h4>
+                            <h4>DOB</h4>
                         </Col>
                     </Row>
 
 
-                    <EmployeeInfo employees={this.state.employees} />
+                    <EmployeeInfo employees={this.state.results} />
                 </Container>
             </div>
         );
