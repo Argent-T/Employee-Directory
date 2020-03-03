@@ -39,12 +39,7 @@ class Employees extends Component {
         console.log(filtered)
       
         
-// var filtered = this.state.results.filter(function(result){
-//     return result.name.first === this.state.search
-//   })
-  
-  
-//   console.log(filtered)
+
     };
 
 
