@@ -23,62 +23,25 @@ function Employees() {
     }, []);
 
     useEffect(() => {
-
-        if( !search){
-            return
-        }
-
-        var text= search.toLocaleLowerCase();
-        var filtered = employees.filter(function(data){
+       
+        var text = search.toLocaleLowerCase();
+        var filtered = employees.filter(function (data) {
             return data.name.first.toLowerCase().includes(text)
         });
         setResults(filtered);
-        console.log(text)
+        // console.log(text)
 
     }, [search]);
 
-    // state = {
-    //     search: "",
-    //     employees: [],
-    //     results: [],
-    //     error: ""
-    // };
-
-    // componentDidMount() {
-    //         API.getEmployees()
-    //         // .then(res => console.log(res.data.results))
-    //         .then(res => this.setState({ employees: res.data.results, results: res.data.results }))
-
-    //         .catch(err => console.log(err));
-
-    // };
-
-    // handleInputChange = event => {
-    //     // search state seems to be behind by one keypress at all times. 
-
-
-
-    //     this.setState({
-    //         search: event.target.value,
-    //         results: this.state.employees
-    //     }, () => { console.log(search) });
-
-    //     var search = this.state.search
-    //     var filtered = this.state.employees.filter(function (name) {
-    //         return name.name.first.includes(search)
-    //     })
-    //     this.setState({ results: filtered })
-    //     console.log(filtered)
-
-
-
-    // // };
-
+    const changeResults = newResults => {
+        setResults(newResults)
+      
+    }
 
     const handleInputChange = event => {
         setSearch(event.target.value);
     };
-
+    
 
     return (
         <div>
@@ -98,34 +61,14 @@ function Employees() {
                             handleInputChange={handleInputChange}
 
                         />
-
-
                     </Col>
                     <Col />
                 </Row>
 
-                <Row>
-                    <Col >
-                        <h4>Image</h4>
-                    </Col>
-                    <Col >
-                        <h4>Name</h4>
-                    </Col>
-                    <Col >
-                        <h4>Phone</h4>
-                    </Col>
-                    <Col >
-                        <h4>Email</h4>
-                    </Col>
-                    <Col >
-                        <h4>DOB</h4>
-                    </Col>
-                </Row>
-
-
-                <EmployeeInfo employees={results} />
+                <EmployeeInfo change ={changeResults} employees={results} />
             </Container>
         </div>
+
     );
 
 

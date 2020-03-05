@@ -4,6 +4,9 @@ ul{
 .img-fluid{
     min-width: 72px;
 }
-li:nth-of-type(even){
+tr:nth-of-type(even){
     background-color: lightgray;
+}
+.point{
+    cursor: pointer 
 }
