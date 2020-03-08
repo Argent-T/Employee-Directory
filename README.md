@@ -7,6 +7,7 @@ React application which uses an API to create a table which can be sorted and fi
 React, JS, JSX, Node
 
 ## deployed application
+https://calm-lowlands-92030.herokuapp.com/
 
 ## License
 MIT License
